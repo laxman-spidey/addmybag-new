@@ -1,0 +1,2 @@
+cd ~/workspace/client/my-app/; npm start
+https://node-mittu-spidey.c9users.io:8080/
