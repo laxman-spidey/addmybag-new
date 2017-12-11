@@ -5,9 +5,9 @@ import AppBar from '../node_modules/material-ui/AppBar';
 import Toolbar from '../node_modules/material-ui/Toolbar';
 import Typography from '../node_modules/material-ui/Typography';
 import Button from '../node_modules/material-ui/Button';
-import IconButton from '../node_modules/material-ui/IconButton';
-import MenuIcon from '../node_modules/material-ui-icons/Menu';
 import Grid from '../node_modules/material-ui/Grid';
+import LoginDialog from './LoginDialog.js';
+
 
 const styles = {
   root: {
@@ -31,7 +31,7 @@ function ButtonAppBar(props) {
           <Typography type="title" color="inherit" className={classes.flex}>
             Add My Bag
           </Typography>
-          <Button color="contrast">Login</Button>
+          <LoginDialog />
           </Grid>
         </Toolbar>
       </AppBar>
@@ -42,6 +42,6 @@ function ButtonAppBar(props) {
 ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
-
 export default withStyles(styles)(ButtonAppBar);
+
 

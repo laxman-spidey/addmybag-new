@@ -7,7 +7,13 @@ import Dialog, {
   DialogTitle,
 } from '../node_modules/material-ui/Dialog';
 
+import Slide from 'material-ui/transitions/Slide';
+
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 class LoginDialog extends React.Component {
+  
   state = {
     open: false,
   };
@@ -23,8 +29,11 @@ class LoginDialog extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={this.handleClickOpen}>Open alert dialog</Button>
-        <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
+        <Button color='contrast' onClick={this.handleClickOpen}>Login</Button>
+        <Dialog open={this.state.open} 
+            onRequestClose={this.handleRequestClose}
+            transition={Transition}
+            keepMounted>
           <DialogTitle>{"Use Google's location service?"}</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -45,5 +54,8 @@ class LoginDialog extends React.Component {
     );
   }
 }
+
+
+
 
 export default LoginDialog;
