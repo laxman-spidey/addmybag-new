@@ -6,14 +6,20 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from '../node_modules/material-ui/Dialog';
-
 import Slide from 'material-ui/transitions/Slide';
+import LoginDialogContent from './LoginDialogContent';
+import firebase, { auth} from './FirebaseConfig.js';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 class LoginDialog extends React.Component {
-  
+   constructor(props) {
+    super(props);
+    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.state = {isLoggedIn: false};
+  }
   state = {
     open: false,
   };
@@ -25,29 +31,67 @@ class LoginDialog extends React.Component {
   handleRequestClose = () => {
     this.setState({ open: false });
   };
+  
+  componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+        this.setState({isLoggedIn: true});  
+      } 
+    });
+  }
+  logout = () => {
+    auth.signOut().then(() => {
+        this.setState({
+            user: null
+        });
+        this.setState({isLoggedIn: false});
+    })
+  }
+  onLoginCompleted = (success) => {
+    if(success) {
+      this.handleRequestClose();
+      this.setState({isLoggedIn: true});
+    }
+    else {
+      console.log("login failed");
+    }
+  }
+  
+  handleLoginClick = () => {
+    // this.setState({isLoggedIn: true});
+    this.handleClickOpen();
+  }
+
+  handleLogoutClick = () => {
+    this.logout(); 
+  }
 
   render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button = null;
+    if (isLoggedIn) {
+      button = <Button color='contrast' label='login'  onClick={this.handleLogoutClick} >logout</Button>;
+    } else {
+      button = <Button color='contrast' label='logout' onClick={this.handleLoginClick} >login</Button>;
+    }
     return (
       <div>
-        <Button color='contrast' onClick={this.handleClickOpen}>Login</Button>
+        {button}
         <Dialog open={this.state.open} 
             onRequestClose={this.handleRequestClose}
             transition={Transition}
-            keepMounted>
-          <DialogTitle>{"Use Google's location service?"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
+            keepMounted 
+            className="no-padding login-dialog"
+            >
+          
+          <DialogContent className="no-padding">
+            <DialogContentText className="no-padding">
+              <LoginDialogContent onLoginCompleted={this.onLoginCompleted} className="no-padding"/>
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">
-              Disagree
-            </Button>
-            <Button onClick={this.handleRequestClose} color="primary" autoFocus>
-              Agree
-            </Button>
+            
           </DialogActions>
         </Dialog>
       </div>

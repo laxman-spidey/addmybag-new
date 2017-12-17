@@ -26,3 +26,63 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+.card-image {
+  width: 300px;
+  height: 300px;
+}
+.front-layer {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index:10;
+  color: white;
+  font-size: 20px;
+}
+.front-layer-text {
+  position: absolute;
+  justify: 'center';
+  text-align: center;
+  float: center;
+  bottom:0px;
+}
+.image-layer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.action-card {
+  padding:20px;
+}
+.no-padding {
+  padding: 0px !important;
+  padding-top : 0px !important;
+}
+.dialog-title {
+  margin: 25px;
+  font-size: 20px;
+}
+.login-dialog {
+  width: 350px;
+}
+.icon {
+  width:24px;
+  height:24px;
+  padding-right: 20px;
+}
+.icon-button: {
+  margin: 8px !important;
+  margin-top: 8px !important;
+  padding: 10px !important;
+}
+.red: {
+  color: red !important;
+}
