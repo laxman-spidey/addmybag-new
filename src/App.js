@@ -9,6 +9,7 @@ import Paper from '../node_modules/material-ui/Paper';
 import Typography from '../node_modules/material-ui/Typography';
 import Travelcard from './Travelcard.js';
 
+import ReactGoogleAutocomplete from './autocomplete.js';
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -23,7 +24,8 @@ class App extends React.Component {
 
   
 
-  render() {    return (
+  render() { 
+    return (
       <div className="App">
         <ButtonAppBar />
         <Grid container justify='center' align-items='center' direction='row' spacing={24}>
@@ -34,6 +36,7 @@ class App extends React.Component {
             <Travelcard image="./img/baggage.png" text="I have a bag"/>
           </div>
         </Grid>
+        <ReactGoogleAutocomplete />
       </div>
       
     );

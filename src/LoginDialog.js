@@ -99,7 +99,4 @@ class LoginDialog extends React.Component {
   }
 }
 
-
-
-
 export default LoginDialog;
